@@ -6,7 +6,10 @@
 package geneticos2021.pkg2;
 
 import binario.Genetico1;
+import binario.Herramientas;
 import binario.Individuo;
+import java.util.Arrays;
+import nReinas.GeneticoReinas;
 
 /**
  *
@@ -22,9 +25,14 @@ public class Geneticos20212 {
 //        Individuo i = new Individuo(arreglo);
 //        System.out.println(i.getFenotipo()+" "+i.getFitness());
 
-          Genetico1 genetico = new Genetico1(1000,0.3,100,20);   
-          genetico.evolucionar();
-          System.out.println();
+//          Genetico1 genetico = new Genetico1(1000,0.3,100,20);   
+//          genetico.evolucionar();
+        GeneticoReinas genetico = new GeneticoReinas(200, 0.25, 50000, 500);
+        genetico.Evolucionar();
+        System.out.println();
+        System.out.println("Fitness: " + Herramientas.mejorPoblacion(genetico.getPoblacionActual()).getFitness());
+        System.out.println("Genotipo: " + Arrays.toString(Herramientas.mejorPoblacion(genetico.getPoblacionActual()).getGenotipo()));
+
     }
-    
+
 }

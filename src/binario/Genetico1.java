@@ -31,7 +31,7 @@ public class Genetico1 {
         
         int[] mask;
         mask = Herramientas.generarArregloBinarios(this.tamGenotipo);
-        System.out.println("Fenotipo: "+this.pobActual.getMejor().getFenotipo()+" Fitness: "+this.pobActual.getMejor().getFitness());
+        //System.out.println("Fenotipo: "+this.pobActual.getMejor().getFenotipo()+" Fitness: "+this.pobActual.getMejor().getFitness());
         //ciclo para las generaciones
         for(int i=0; i<this.numGeneraciones; i++){
             //proceso iterativo para creacion de la nueva poblacion
