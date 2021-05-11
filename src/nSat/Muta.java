@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nReinas;
+package nSat;
 
 import java.util.Random;
 
@@ -13,15 +13,13 @@ import java.util.Random;
  */
 public class Muta {
     
-    public static Individuo mutaAleatoria(Individuo ind){
+     public static IndividuonSat mutaAleatoria(IndividuonSat ind){
         Random ran = new Random();
-        int posGen = ran.nextInt(ind.getGenotipo().length);
-        int nuevo = ran.nextInt(ind.getGenotipo().length);
-        
-        if(posGen == 0){
-            //Nada
+        int pos = ran.nextInt(ind.getGenotipo().length);
+        if(ind.getGenotipo()[pos]==0){
+            ind.getGenotipo()[pos] = 1;
         }else{
-        ind.getGenotipo()[posGen]=nuevo;
+            ind.getGenotipo()[pos] = 0;
         }
         return ind;
     }

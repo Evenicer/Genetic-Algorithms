@@ -3,36 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nReinas;
+package Tsp;
 
 import HerramientasGeneral.Grafica;
-import nReinas.Cruza;
 import binario.Herramientas;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
  * @author Rogelio Valle
  */
-public class GeneticoReinas {
-    //Elementos que necesitamos
+public class GeneticoTsp {
+      //Elementos que necesitamos
     private int tamPob;
     private double probMuta;
     private int numGeneraciones;
     private int tamGenotipo;
-    private ArrayList<Individuo> poblacionActual;
+    private ArrayList<IndividuoTsp> poblacionActual;
     private int[] fitness;
+    private int CInicial;
+    private int[][] matrizDistancias;
     
     
-    public GeneticoReinas(int tamPob, double probMuta, int numGeneraciones , int tamGenotipo){
+    public GeneticoTsp(int tamPob, double probMuta, int numGeneraciones , int tamGenotipo , int CInicial , int[][] matrizDistancias){
         this.tamPob = tamPob;
         this.probMuta = probMuta;
         this.numGeneraciones = numGeneraciones;
         this.tamGenotipo = tamGenotipo;
         this.poblacionActual = new ArrayList<>();
+        this.CInicial = CInicial;
+        IndividuoTsp.CInicial = CInicial;
         this.fitness = new int[this.numGeneraciones];
+        IndividuoTsp.matrizDistancias = matrizDistancias;
     }
     
     public void Evolucionar(){
@@ -43,34 +45,34 @@ public class GeneticoReinas {
         //ciclo para las generaciones
         for(int i=1; i<this.numGeneraciones; i++){
             //proceso iterativo para creacion de la nueva poblacion
-            ArrayList<Individuo> nuevaPob = new ArrayList<>();
+            ArrayList<IndividuoTsp> nuevaPob = new ArrayList<>();
             for(int j=0; j<tamPob; j++){
                 //Seleccionamos una madre y un padre
-                Individuo padre = Seleccion.seleccionRuleta(this.getPoblacionActual());
-                Individuo madre = Seleccion.seleccionRuleta(this.getPoblacionActual());
+                IndividuoTsp padre = Seleccion.seleccionAleatoria(this.getPoblacionActual());
+                IndividuoTsp madre = Seleccion.seleccionAleatoria(this.getPoblacionActual());
                 //Se crea una mascara
-                mask = Herramientas.generarArregloBinarios(this.tamGenotipo);
+                mask = Herramientas.generarArregloTsp(this.tamGenotipo);
                 //cruza
-                Individuo hijo = Cruza.cruza1punto(mask, madre, padre);
+                IndividuoTsp hijo = Cruza.cruzaMascara2(madre, padre,mask);
                 //evaluar la probabilidad de muta
                 if (generarProbabilidadMuta()){
-                    Muta.mutaAleatoria(hijo);
+                    Muta.mutaIntercambio2(hijo);
                 }
                 //agregamos el individuo a la nueva poblacion
                 nuevaPob.add(hijo);
             }
             //Actualuzamos la poblacion actual
             sustituirPoblacion(nuevaPob);
-            System.out.println("Generacion: "+i+" Fitness: "+Herramientas.mejorPoblacion(nuevaPob).getFitness());
-            fitness[i] = Herramientas.mejorPoblacion(nuevaPob).getFitness();
+            System.out.println("Generacion: "+i+" Fitness: "+HerramientasTsp.mejorPoblacion(nuevaPob).getFitness());
+            fitness[i] = HerramientasTsp.mejorPoblacion(nuevaPob).getFitness();
         }
         graficar();
     }
     
      public void graficar (){
        
-        Grafica g1 = new Grafica("Generaciones","Fitness","N-Reinas");
-        g1.agregarSerie("RED:", this.fitness);
+        Grafica g1 = new Grafica("Generaciones","Fitness","TSP");
+        g1.agregarSerie("Mejor Fitness:", this.fitness);
         g1.crearGrafica();
         g1.muestraGrafica();
     
@@ -79,7 +81,7 @@ public class GeneticoReinas {
      private void generarPoblacionInicial() {
         // generar un población aleatoria de individuos
         for (int i = 0; i < this.tamPob; i++) {
-            this.getPoblacionActual().add(new Individuo(this.tamGenotipo));
+            this.getPoblacionActual().add(new IndividuoTsp(this.tamGenotipo));
         }
     }
      
@@ -92,17 +94,17 @@ public class GeneticoReinas {
 
     }
 
-    private void sustituirPoblacion(ArrayList<Individuo> nuevaPob) {
+    private void sustituirPoblacion(ArrayList<IndividuoTsp> nuevaPob) {
         this.getPoblacionActual().clear();
-        for (Individuo aux : nuevaPob) {
-            this.getPoblacionActual().add(new Individuo(aux));
+        for (IndividuoTsp aux : nuevaPob) {
+            this.getPoblacionActual().add(new IndividuoTsp(aux));
         }
     }
 
     /**
      * @return the poblacionActual
      */
-    public ArrayList<Individuo> getPoblacionActual() {
+    public ArrayList<IndividuoTsp> getPoblacionActual() {
         return poblacionActual;
     }
 }

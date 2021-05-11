@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package binario;
+package nSat;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,9 +14,9 @@ import java.util.Random;
  */
 public class Seleccion {
     
-    public static Individuo seleccionAleatoria(Poblacion pob){
+    public static IndividuonSat seleccionAleatoria(ArrayList<IndividuonSat> pob){
         Random ran = new Random();
-        
-        return pob.getPoblacion().get(ran.nextInt(pob.getPoblacion().size()));
+        int pos = ran.nextInt(pob.size());
+        return new IndividuonSat(pob.get(pos));
     }
 }

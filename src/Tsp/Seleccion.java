@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nReinas;
+package Tsp;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,13 +13,13 @@ import java.util.Random;
  * @author Rogelio Valle
  */
 public class Seleccion {
-    public static Individuo seleccionAleatoria(ArrayList<Individuo> pob){
+    public static IndividuoTsp seleccionAleatoria(ArrayList<IndividuoTsp> pob){
         Random ran = new Random();
         int pos = ran.nextInt(pob.size());
-        return new Individuo(pob.get(pos));
+        return new IndividuoTsp(pob.get(pos));
     }
     
-    public static Individuo seleccionRuleta(ArrayList<Individuo> pob){
+    public static IndividuoTsp seleccionRuleta(ArrayList<IndividuoTsp> pob){
         double suma = 0;
         double sumaPob = 0;
         
@@ -34,11 +34,9 @@ public class Seleccion {
         for(int x=0; x<pob.size(); x++){
             sumaPob += pob.get(x).getFitness();
             if(sumaPob >= pos){
-                return new Individuo(pob.get(x));
+                return new IndividuoTsp(pob.get(x));
             }
         }
-        return new Individuo(pob.get(0));
+        return new IndividuoTsp(pob.get(0));
     }
-    
-    
 }

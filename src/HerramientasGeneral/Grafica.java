@@ -5,8 +5,11 @@
  */
 package HerramientasGeneral;
 
+import java.io.File;
+import java.io.IOException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
@@ -58,9 +61,10 @@ public class Grafica {
         this.grafica = ChartFactory.createXYAreaChart(titulo, ejeX, ejeY, series);
     }
     
+    
      public void muestraGrafica(){
     
-        ChartFrame frame = new ChartFrame("Genetico N-Reinas", grafica);
+        ChartFrame frame = new ChartFrame("Genetico TSP", grafica);
         frame.setVisible(true);
         frame.setSize(1000,800);
         

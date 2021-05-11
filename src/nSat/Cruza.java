@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nReinas;
-
-import java.util.ArrayList;
-import java.util.Random;
+package nSat;
 
 /**
  *
@@ -14,7 +11,7 @@ import java.util.Random;
  */
 public class Cruza {
     
-    public static Individuo cruza1punto(int mask[] , Individuo madre, Individuo padre){
+    public static IndividuonSat cruza1punto(int mask[] , IndividuonSat madre, IndividuonSat padre){
         int genotipo1[] = new int[mask.length];
         int genotipo2[] = new int[mask.length];
         
@@ -28,14 +25,18 @@ public class Cruza {
                 genotipo2[i] = madre.getGenotipo()[i];
             }
         }
-        Individuo hijo1 = new Individuo(genotipo1);
-        Individuo hijo2 = new Individuo(genotipo2);
+        IndividuonSat hijo1 = new IndividuonSat(genotipo1);
+        IndividuonSat hijo2 = new IndividuonSat(genotipo2);
 
         //comparamos el fenotipo de los dos para retornar al mejor adaptado
-        if (hijo1.getFitness() < hijo2.getFitness()) {
+        if ( (hijo1.getFitness() > hijo2.getFitness() && hijo1.getFitness() > padre.getFitness() && hijo1.getFitness() > madre.getFitness()) )  {
             return hijo1;
-        } else {
+        } else if( (hijo2.getFitness() > hijo1.getFitness() && hijo2.getFitness() > padre.getFitness() && hijo2.getFitness() > madre.getFitness())  ) {
             return hijo2;
+        } else if ( (padre.getFitness() > hijo1.getFitness() && padre.getFitness() > hijo2.getFitness() && padre.getFitness() > madre.getFitness()) ){
+            return padre;
+        } else{
+            return madre;
         }
-    } 
+    }
 }
