@@ -7,8 +7,12 @@ package geneticos2021.pkg2;
 
 import HerramientasGeneral.GeneradorArchivos;
 import HerramientasGeneral.Grafica;
+import Tsp.Control;
 import Tsp.GeneticoTsp;
+import Tsp.GeneticoTspV2;
 import Tsp.HerramientasTsp;
+import Tsp.Manager;
+import Tsp.Seleccion;
 import binario.Genetico1;
 import binario.Herramientas;
 import binario.Individuo;
@@ -56,12 +60,12 @@ public class Geneticos20212 {
 //          //Prueba Archivos
 //       //TSP Generador
 //       HerramientasTsp t = new HerramientasTsp();
-//       int[][] cam = t.generarMatriz(1000);
+//       int[][] cam = t.generarMatrizInclinacion(100);
 //       t.guardarMatriz("caminos.txt", cam);
-//              
-        //int[][] cam = t.cargarDistancias();
-        //System.out.println(cam.length);
-//      
+  
+//        int[][] cam = t.cargarDistancias();
+//        System.out.println(cam.length);
+      
 //        for (int x = 0; x < cam.length; x++) {
 //            System.out.print("|");
 //            for (int y = 0; y < cam[x].length; y++) {
@@ -76,12 +80,54 @@ public class Geneticos20212 {
         
         
 ////        //TSP GENETICO
-//        HerramientasTsp t = new HerramientasTsp();
-//        int[][] matriz = t.cargarDistancias();
-//
-//        GeneticoTsp tsp = new GeneticoTsp(100, 0.9, 100000, matriz.length, 110, matriz);
+        HerramientasTsp t = new HerramientasTsp();
+        int[][] matriz = t.cargarDistancias();
+        int[][] matrizInclinaciones = new int[matriz.length][matriz.length];
+        
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matrizInclinaciones[i][j] = matriz[i][j];
+                matrizInclinaciones[j][i] = (matriz[j][i]) * -1;
+            }
+        }
+        
+        ArrayList<Control> configuraciones = new ArrayList<>();
+        
+        Control control = new Control(0,
+                                      3000,
+                                      100,
+                                      0.0001,
+                                      new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM, Seleccion.TipoSeleccion.RANDOM},
+                                      matriz.length,
+                                      1,
+                                      matriz,
+                                      matrizInclinaciones);
+        
+        Control control2 = new Control(0,
+                                      3000,
+                                      100,
+                                      1,
+                                      new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM, Seleccion.TipoSeleccion.RANDOM},
+                                      matriz.length,
+                                      1,
+                                      matriz,
+                                      matrizInclinaciones);
+        configuraciones.add(control);
+        configuraciones.add(control2);
+        
+        Manager m = new Manager();
+        
+        m.generarGeneticos(configuraciones);
+        m.ejecutarGeneticos();
+        
+        
+        
+        
+        
+//        GeneticoTspV2 tsp = new GeneticoTspV2(100, 1, 100, matriz.length, 1, matriz, matrizInclinaciones);
 //        System.out.println("matriz: "+matriz.length);
 //        tsp.Evolucionar();
+//        System.out.println();
 //        System.out.println("Genotipo: " + Arrays.toString(HerramientasTsp.mejorPoblacion(tsp.getPoblacionActual()).getGenotipo()));
 //        
 //        System.out.println();
@@ -89,11 +135,11 @@ public class Geneticos20212 {
 
 
 //     //3Sat Genetico
-       nSat.Herramientas.leerDatos();
-       
-       Genetico3Sat nsat = new Genetico3Sat(5000,3000,0.7,100);
-       nsat.Evolucionar();
-       System.out.println();
+//       nSat.Herramientas.leerDatos();
+//       
+//       Genetico3Sat nsat = new Genetico3Sat(5000,3000,0.7,100);
+//       nsat.Evolucionar2();
+//       System.out.println();
        //System.out.println("Genotipo: " + Arrays.toString(nSat.Herramientas.mejorPoblacion(nsat.getPoblacionActual()).getGenotipo()));
 
 //     //3Sat Genetico

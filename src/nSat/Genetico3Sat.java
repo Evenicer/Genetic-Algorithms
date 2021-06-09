@@ -30,6 +30,14 @@ public class Genetico3Sat {
         this.poblacionActual = new ArrayList<>();
         this.fitness = new int[this.numGeneraciones];
     }
+
+    public double getProbMuta() {
+        return probMuta;
+    }
+
+    public void setProbMuta(double probMuta) {
+        this.probMuta = probMuta;
+    }
     
     public void Evolucionar(){
         //Se genera una poblacion inicial
@@ -90,8 +98,8 @@ public class Genetico3Sat {
             }
             //Actualuzamos la poblacion actual
             sustituirPoblacion(nuevaPob);
-            System.out.println("Generacion: "+i+" Fitness: "+nSat.Herramientas.mejorPoblacion(nuevaPob).getFitness());
-            System.out.println("Genotipo: " + Arrays.toString(nSat.Herramientas.mejorPoblacion(nuevaPob).getGenotipo()));
+            //System.out.println("Generacion: "+i+" Fitness: "+nSat.Herramientas.mejorPoblacion(nuevaPob).getFitness());
+            //System.out.println("Genotipo: " + Arrays.toString(nSat.Herramientas.mejorPoblacion(nuevaPob).getGenotipo()));
             fitness[i] = Herramientas.mejorPoblacion(nuevaPob).getFitness();
         }
         graficar();

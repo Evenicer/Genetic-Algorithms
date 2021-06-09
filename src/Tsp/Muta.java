@@ -21,18 +21,8 @@ public class Muta {
         return ind;
     }
     
+   
     public static IndividuoTsp mutaIntercambio(IndividuoTsp ind){
-        Random ran = new Random();
-        
-        int posIntercambio = ran.nextInt(ind.getGenotipo().length);
-        int posIntercambio2 = ran.nextInt(ind.getGenotipo().length);
-        
-        ind.getGenotipo()[posIntercambio] = ind.getGenotipo()[posIntercambio2];
-        //ind.getGenotipo()[posIntercambio2] = ind.getGenotipo()[posIntercambio];
-        return ind;
-    }
-    
-    public static IndividuoTsp mutaIntercambio2(IndividuoTsp ind){
         // Intercambiamos aleatoriamente una posición entre las ciudades
             Random ran = new Random();
             int gen1 = -1;

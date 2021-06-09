@@ -13,6 +13,9 @@ import java.util.Random;
  * @author Rogelio Valle
  */
 public class Seleccion {
+    
+    public enum TipoSeleccion{RANDOM,RULETA}
+    
     public static IndividuoTsp seleccionAleatoria(ArrayList<IndividuoTsp> pob){
         Random ran = new Random();
         int pos = ran.nextInt(pob.size());

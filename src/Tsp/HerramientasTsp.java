@@ -26,9 +26,11 @@ import javax.swing.JFileChooser;
 public class HerramientasTsp {
 
     public static int distancias[][];
+    public static int inclinaciones[][];
 
     public int[][] generarMatriz(int tam) {
         distancias = new int[tam][tam];
+        inclinaciones = new int[tam][tam];
 
         for (int x = 0; x < tam; x++) {
             for (int y = 0; y < tam; y++) {
@@ -40,7 +42,8 @@ public class HerramientasTsp {
         }
         return distancias;
     }
-
+    
+   
     public void guardarMatriz(String nombre, int[][] matriz) throws IOException {
         BufferedWriter outputWriter = null;
         outputWriter = new BufferedWriter(new FileWriter(nombre));
@@ -157,6 +160,5 @@ public class HerramientasTsp {
             }
         }
         return mejor;
-    }
-   
+    }   
 }

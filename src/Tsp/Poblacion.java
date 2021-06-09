@@ -42,7 +42,7 @@ public class Poblacion {
     public IndividuoTsp getMejor(){
         int mejor = 0;
         for(int i=1; i<this.individuos.size(); i++){
-            if( this.individuos.get(i).getFitness() < this.individuos.get(mejor).getFitness()){
+            if( this.individuos.get(i).getFitnessGeneral() < this.individuos.get(mejor).getFitnessGeneral()){
                 mejor = i;
             }
         }

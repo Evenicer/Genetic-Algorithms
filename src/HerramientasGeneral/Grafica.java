@@ -5,6 +5,7 @@
  */
 package HerramientasGeneral;
 
+import Tsp.TSPJFrame;
 import java.io.File;
 import java.io.IOException;
 import org.jfree.chart.ChartFactory;
@@ -40,9 +41,22 @@ public class Grafica {
     
     public void agregarDatoASerie(String nombre, XYDataItem dato)   {
        this.series.getSeries(nombre).add(dato);
+       
     }
-     
+      
     public void agregarSerie(String nombre, int[] datos){
+    
+        XYSeries serie = new XYSeries(nombre);
+        // agregar cada uno de los datos en la serie 
+        for (int x=0; x < datos.length;x++){
+            serie.add(x, datos[x]);
+        }
+        // agregamos la serie que se generÃ³ 
+        this.series.addSeries(serie);
+     
+    }
+    
+    public void agregarSerie2(String nombre, double[] datos){
     
         XYSeries serie = new XYSeries(nombre);
         // agregar cada uno de los datos en la serie 
@@ -63,11 +77,10 @@ public class Grafica {
     
     
      public void muestraGrafica(){
-    
-        ChartFrame frame = new ChartFrame("Genetico TSP", grafica);
+
+        ChartFrame frame = new ChartFrame("Genetico 3Sat", grafica);
         frame.setVisible(true);
         frame.setSize(1000,800);
-        
     }
     
 }
